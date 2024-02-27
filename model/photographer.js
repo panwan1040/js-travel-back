@@ -1,16 +1,16 @@
-const { Sequenlize, sequelize } = require('../db');
+const { Sequelize, sequelize } = require('../db');
 const Photographer = sequelize.define('photographer', {
     PhotographerID: {
-        type: Sequenlize.INTEGER,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
     Name: {
-        type: Sequenlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     Bio: {
-        type: Sequenlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
     },
 });

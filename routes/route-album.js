@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Sequenlize, sequelize } = require('../db');
+const { Sequelize, sequelize } = require('../db');
 const { Album } = require('../model/albums');
 
 // get all

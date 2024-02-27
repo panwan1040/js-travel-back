@@ -1,18 +1,21 @@
 const express = require('express');
 
-const { Sequenlize, sequelize } = require('./db');
-// const { Album } = require('./model/albums');
-// const { Location } = require('./model/location');
-// const { Photographer } = require('./model/photographer');
-// const { Photo } = require('./model/photos');
+const { Sequelize, sequelize } = require('./db');
+
 
 const albumRoutes = require('./routes/route-album');
+const locationRoutes = require('./routes/route-location');
+const photographerRoutes = require('./routes/route-photographer');
+const photoRoutes = require('./routes/route-photos');
 
 
 const app = express();
 
 app.use(express.json());
-app.use(albumRoutes)
+app.use("/api", albumRoutes);
+app.use("/api", locationRoutes);
+app.use("/api", photographerRoutes);
+app.use("/api", photoRoutes);
 
 
 

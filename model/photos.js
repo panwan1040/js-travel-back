@@ -1,6 +1,4 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db'); 
-
+const { Sequelize, sequelize } = require('../db');
 const Photo = sequelize.define('photo', {
     PhotoID: {
         type: Sequelize.INTEGER,
@@ -11,7 +9,7 @@ const Photo = sequelize.define('photo', {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'album', 
+            model: 'albums', 
             key: 'AlbumID'
         }
     },
@@ -19,7 +17,7 @@ const Photo = sequelize.define('photo', {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'photographer', 
+            model: 'photographers', 
             key: 'PhotographerID'
         }
     },
@@ -27,7 +25,7 @@ const Photo = sequelize.define('photo', {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'location', 
+            model: 'locations', 
             key: 'LocationID'
         }
     },
@@ -37,8 +35,8 @@ const Photo = sequelize.define('photo', {
     },
     Caption: {
         type: Sequelize.STRING,
-        allowNull: true 
+        allowNull: false 
     },
 });
 
-module.exports = Photo;
+module.exports = { Photo };

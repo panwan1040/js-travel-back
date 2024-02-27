@@ -1,19 +1,20 @@
-const { Sequenlize, sequelize } = require('../db');
+const { Sequelize, sequelize } = require('../db');
 const Album = sequelize.define('album', {
     AlbumID: {
-        type: Sequenlize.INTEGER,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
     AlbumName: {
-        type: Sequenlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     Description: {
-        type: Sequenlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
     },
 
 });
+
 
 module.exports = { Album }

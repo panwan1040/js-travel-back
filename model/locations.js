@@ -1,16 +1,16 @@
-const { Sequenlize, sequelize } = require('../db');
+const { Sequelize, sequelize } = require('../db');
 const Location = sequelize.define('location', {
     LocationID: {
-        type: Sequenlize.INTEGER,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
     LocationName: {
-        type: Sequenlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     Description: {
-        type: Sequenlize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
     },
 });
