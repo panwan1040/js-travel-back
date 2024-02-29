@@ -52,19 +52,38 @@ router.put('/photographers/:id', (req, res) => {
 });
 
 //delete
+// router.delete('/photographers/:id', (req, res) => {
+//     Photographer.findByPk(req.params.id).then(photographer => {
+//         if (!photographer) {
+//             res.status(404).send('photographer not found');
+//         } else {
+//             photographer.destroy().then(() => {
+//                 res.send("delete id :", req.params.id)
+//             }).catch(err => {
+//                 res.status(500).send(err);
+//             });
+//         }
+//     }).catch(err => {
+//         res.status(500).send(err);
+//     });
+// });
+
 router.delete('/photographers/:id', (req, res) => {
     Photographer.findByPk(req.params.id).then(photographer => {
         if (!photographer) {
-            res.status(404).send('photographer not found');
+            return res.status(404).send('photographer not found');
         } else {
             photographer.destroy().then(() => {
-                res.send("delete id :", req.params.id)
+                return res.send(`Deleted photographer with id: ${req.params.id}`);
             }).catch(err => {
-                res.status(500).send(err);
+                if (err.name === 'SequelizeForeignKeyConstraintError') {
+                    return res.status(400).send('Cannot delete photographer because it is being referenced by another table');
+                }
+                return res.status(500).send(err.message);
             });
         }
     }).catch(err => {
-        res.status(500).send(err);
+        return res.status(500).send(err.message);
     });
 });
 

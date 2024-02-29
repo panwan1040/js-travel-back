@@ -7,27 +7,30 @@ const Photo = sequelize.define('photo', {
     },
     AlbumID: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'albums', 
             key: 'AlbumID'
-        }
+        },
+        onDelete: 'SET NULL'
     },
     PhotographerID: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'photographers', 
             key: 'PhotographerID'
-        }
+        },
+        onDelete: 'SET NULL'
     },
     LocationID: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'locations', 
             key: 'LocationID'
-        }
+        },
+        onDelete: 'SET NULL'
     },
     PhotoPath: {
         type: Sequelize.STRING,

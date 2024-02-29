@@ -52,19 +52,38 @@ router.put('/albums/:id', (req, res) => {
 });
 
 //delete
+// router.delete('/albums/:id', (req, res) => {
+//     Album.findByPk(req.params.id).then(album => {
+//         if (!album) {
+//             res.status(404).send('album not found');
+//         } else {
+//             album.destroy().then(() => {
+//                 res.send("delete id :", req.params.id)
+//             }).catch(err => {
+//                 res.status(500).send(err);
+//             });
+//         }
+//     }).catch(err => {
+//         res.status(500).send(err);
+//     });
+// });
+
 router.delete('/albums/:id', (req, res) => {
     Album.findByPk(req.params.id).then(album => {
         if (!album) {
-            res.status(404).send('album not found');
+            return res.status(404).send('album not found');
         } else {
             album.destroy().then(() => {
-                res.send("delete id :", req.params.id)
+                return res.send(`Deleted album with id: ${req.params.id}`);
             }).catch(err => {
-                res.status(500).send(err);
+                if (err.name === 'SequelizeForeignKeyConstraintError') {
+                    return res.status(400).send('Cannot delete album because it is being referenced by another table');
+                }
+                return res.status(500).send(err.message);
             });
         }
     }).catch(err => {
-        res.status(500).send(err);
+        return res.status(500).send(err.message);
     });
 });
 

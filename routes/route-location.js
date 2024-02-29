@@ -55,17 +55,21 @@ router.put('/locations/:id', (req, res) => {
 router.delete('/locations/:id', (req, res) => {
     Location.findByPk(req.params.id).then(location => {
         if (!location) {
-            res.status(404).send('location not found');
+            return res.status(404).send('Location not found');
         } else {
             location.destroy().then(() => {
-                res.send("delete id :", req.params.id)
+                return res.send(`Deleted location with id: ${req.params.id}`);
             }).catch(err => {
-                res.status(500).send(err);
+                if (err.name === 'SequelizeForeignKeyConstraintError') {
+                    return res.status(400).send('Cannot delete location because it is being referenced by another table');
+                }
+                return res.status(500).send(err.message);
             });
         }
     }).catch(err => {
-        res.status(500).send(err);
+        return res.status(500).send(err.message);
     });
 });
+
 
 module.exports = router;
